@@ -50,6 +50,10 @@ function playRound() {
 
 // plays a full game of Rock, Paper, Scissors
 function playGame() {
+
+    // resets scores before each new game
+    playerScore = 0;
+    computerScore = 0; 
     
     // plays a full round 5x
     for (let i = 0; i < 5; i++) {

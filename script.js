@@ -1,6 +1,5 @@
-// function userPlay() {
-//  return prompt("Rock, Paper, or Scissors?");
-// }
+// to play, run playGame() in the console.
+// playGame();
 
 const choices = [
     "ROCK",
@@ -8,22 +7,27 @@ const choices = [
     "SCISSORS"
 ];
 
+// randomizes an index of choices array
 function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-const playerSelection = "ROCK";
-const computerSelection = computerPlay();
+// initalizes scores
+let playerScore = 0;
+let computerScore = 0;
 
-console.log(`You chose ${playerSelection}`);
-console.log(`Computer chose ${computerSelection}`);
-console.log(playRound(playerSelection, computerSelection));
+// plays one round of Rock, Paper, Scissors:
+function playRound() {
 
-function playRound(playerSelection, computerSelection) {
+    // initializes round selections
+    const computerSelection = computerPlay();
+    const playerSelection = prompt("Pick one: Rock, Paper, or Scissors?").toUpperCase();
 
-    let playerScore = 0;
-    let computerScore = 0;
+    // logs round choices
+    console.log(`You chose ${playerSelection}`);
+    console.log(`Computer chose ${computerSelection}`);
 
+    // evaluates winner, increments points, and logs message
     if (playerSelection == computerSelection) {
         console.log("Whoa! It's a draw.");
     } else if (playerSelection == "ROCK" && computerSelection == "SCISSORS" || playerSelection == "SCISSORS" && computerSelection == "PAPER" || playerSelection == 
@@ -35,21 +39,29 @@ function playRound(playerSelection, computerSelection) {
         computerScore++;
     }
 
-    let scores = [[`Computer`, computerScore], [`Player`, playerScore]];
-
+    // initializes scores array
+    let scores = [[`Player`, playerScore], [`Computer`, computerScore]];
+    
+    // logs current Round score
+    console.log("----------------------");
     console.log("Current Score:");
     console.table(scores);
-    return
 }
 
-// function playGame() {
-//     // let playerScore;
-//     // let computerScore;
-//     // let gameWinner;
+// plays a full game of Rock, Paper, Scissors
+function playGame() {
+    
+    // plays a full round 5x
+    for (let i = 0; i < 5; i++) {
+        playRound();
+    };
 
-//     for (let i = 0; i < 5; i++) {
-//         playRound();
-
-//     }
-//     // console.log(`${gameWinner} wins the game!`)
-// }
+    // evaluates game winner and logs message
+    if (playerScore > computerScore) {
+        console.log(`Wow, you won with ${playerScore} against the Computer's ${computerScore}! Play again?`);
+    } else if (playerScore == computerScore) {
+        console.log(`I can't believe it. You tied with the 'bot, ${playerScore} and ${computerScore}. Play again?`);
+    } else {
+        console.log(`You lost against a robot, ${computerScore} to ${playerScore}. Pitiful. Can your ego take another game?`);
+    }
+}
